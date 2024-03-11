@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart and Fireworks</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+            overflow: hidden;
+        }
+
+        #heart {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            background-image: url('https://i.pinimg.com/236x/96/10/3e/96103e77050891654de2de6146f10302.jpg'); /* Thay 'heart.png' bằng URL của hình trái tim */
+            background-size: cover;
+            animation: heartbeat 1s infinite;
+        }
+        p{
+            text-align: center;
+        }
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    <div id="heart"><p>anh yêu em nhiều nhắm</p></div>
+</body>
+</html>

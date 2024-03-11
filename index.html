@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tỏ tình</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: pink;
+            height: 100vh;
+        }
+        #container{
+            background-color: palevioletred;
+            padding: 50px;
+            border-radius: 40px;
+            width: 300px;
+        }
+        h3{
+            text-align: center;
+        }
+        .btn{
+            width: 100px;
+            height: 40px;
+            padding: 10px;
+            margin-left: 30px;
+            border: none;
+            border-radius: 15px;
+            background-color: wheat;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn:hover{
+            background-color: plum
+        }
+        #no{
+            position: absolute;
+            width: 100px;
+            height: 40px;
+            margin-left: 40px;
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div>
+            <h3>LÀM BẠN GÁI ANH NHA =))</h3>
+            <input class="btn" id="yes" type="button" value="Đồng ý &#x2764;" onclick="window.location.href='dongy.html'" >
+            <input class="btn" id="no" type="button" value="Không :((">
+        </div>
+    </div>
+    <script>
+        const button = document.getElementById('no');
+        
+        button.addEventListener('mouseenter', () => {
+          const newX = Math.random() * (window.innerWidth - button.offsetWidth);
+          const newY = Math.random() * (window.innerHeight - button.offsetHeight);
+          
+          button.style.left = newX + 'px';
+          button.style.top = newY + 'px';
+        });
+    </script>
+</body>
+</html>
