@@ -58,14 +58,19 @@
     </div>
     <script>
         const button = document.getElementById('no');
-        
-        button.addEventListener('mouseenter', () => {
-          const newX = Math.random() * (window.innerWidth - button.offsetWidth);
-          const newY = Math.random() * (window.innerHeight - button.offsetHeight);
-          
-          button.style.left = newX + 'px';
-          button.style.top = newY + 'px';
-        });
+
+        const handleMove = () => {
+            const newX = Math.random() * (window.innerWidth - button.offsetWidth);
+            const newY = Math.random() * (window.innerHeight - button.offsetHeight);
+
+            button.style.left = newX + 'px';
+            button.style.top = newY + 'px';
+        };
+
+        // Sử dụng sự kiện 'click' cho điện thoại di động
+        const eventName = ('ontouchstart' in window) ? 'touchstart' : 'click';
+
+        button.addEventListener(eventName, handleMove);
     </script>
 </body>
 </html>
