@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Heart Shape</title>
+<title>Anh yêu em! ❤️</title>
 <style>
   body, html {
     height: 100%;
@@ -11,14 +11,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: pink;
+    background-color: #1a000d; /* Nền tối để pháo hoa nổi bật */
+    overflow: hidden;
   }
 
   .heart {
     width: 200px;
     height: 200px;
     position: relative;
-    animation: heartbeat 1s infinite;
+    animation: heartbeat 1.2s infinite ease-in-out;
   }
 
   .heart:before,
@@ -29,7 +30,7 @@
     top: 0;
     width: 100px;
     height: 160px;
-    background-color: red;
+    background-color: #ff4081; /* Màu hồng đậm hơn */
     border-radius: 100px 100px 0 0;
     transform: rotate(-45deg);
     transform-origin: 0 100%;
@@ -40,32 +41,76 @@
     transform: rotate(45deg);
     transform-origin: 100% 100%;
   }
+
   .heart span {
+    font-family: 'Quicksand', sans-serif;
     position: absolute;
-    top: 50px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    font-size: 15px;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: bold;
+    color: white; /* Chữ trắng nổi bật trên nền đỏ */
     z-index: 1;
-    
+    text-align: center;
+    width: 100%;
+    animation: fadeInText 2s ease-in-out;
   }
 
   @keyframes heartbeat {
-    0% {
+    0%, 100% {
       transform: scale(1);
     }
-    50% {
-      transform: scale(1.1);
+    10%, 30% {
+      transform: scale(0.9);
     }
-    100% {
-      transform: scale(1);
+    20%, 40%, 60%, 80% {
+        transform: scale(1.1);
     }
+    50%, 70%, 90% {
+        transform: scale(1);
+    }
+  }
+  
+  @keyframes fadeInText {
+      from { opacity: 0; }
+      to { opacity: 1; }
   }
 </style>
 </head>
 <body>
+
 <div class="heart">
-    <span>ANH YÊU EM NHIỀU NHẮM</span>
+    <span>ANH YÊU EM<br>NHIỀU LẮM</span>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script>
+    // Hàm bắn pháo hoa
+    function celebrate() {
+        const duration = 5 * 1000; // 5 giây
+        const animationEnd = Date.now() + duration;
+        const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        const interval = setInterval(function() {
+            const timeLeft = animationEnd - Date.now();
+            if (timeLeft <= 0) {
+                return clearInterval(interval);
+            }
+            const particleCount = 50 * (timeLeft / duration);
+            // Bắn từ hai bên
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+        }, 250);
+    }
+
+    // Chạy hiệu ứng ngay khi trang được tải
+    celebrate();
+</script>
+
 </body>
 </html>
