@@ -6,7 +6,7 @@
     <title>Trả lời anh đi...</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
     <style>
         body {
             font-family: 'Quicksand', sans-serif;
@@ -39,24 +39,30 @@
             margin-bottom: 30px;
         }
 
+        /* **SỬA LỖI:** Thay đổi cấu trúc button-group */
         .button-group {
             display: flex;
+            justify-content: space-around; /* Dàn đều các mục con */
+            width: 100%;
+        }
+
+        /* **SỬA LỖI:** Thêm div bọc ngoài để giữ chỗ */
+        .button-wrapper {
+            /* Mỗi div bọc sẽ chiếm không gian riêng, giữ cho nút YES cố định */
+            flex-basis: 130px; /* Đặt chiều rộng cơ sở cho mỗi khung */
+            display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 15px; /* Giảm khoảng cách một chút */
         }
 
         .btn {
             border: none;
             border-radius: 10px;
-            padding: 15px 0; /* Dùng padding top/bottom */
+            padding: 15px 0;
             font-size: 18px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            
-            /* **SỬA LỖI:** Thêm chiều rộng tối thiểu và không cho co lại */
             width: 130px;
             flex-shrink: 0; 
         }
@@ -68,7 +74,7 @@
 
         #yes-btn:hover {
             background-color: #f50057;
-            transform: scale(1.1); /* Chỉ phóng to khi hover */
+            transform: scale(1.1);
         }
 
         #no-btn {
@@ -87,8 +93,12 @@
     <div id="container">
         <h3>Làm bạn gái anh nha? 🥰</h3>
         <div class="button-group">
-            <button class="btn" id="yes-btn" onclick="window.location.href='dongy.html'">Đồng ý ❤️</button>
-            <button class="btn" id="no-btn">Không :(</button>
+            <div class="button-wrapper">
+                <button class="btn" id="yes-btn" onclick="window.location.href='dongy.html'">Đồng ý ❤️</button>
+            </div>
+            <div class="button-wrapper">
+                <button class="btn" id="no-btn">Không :(</button>
+            </div>
         </div>
     </div>
 
