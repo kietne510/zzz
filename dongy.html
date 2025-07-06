@@ -11,13 +11,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1a000d; /* Nền tối để pháo hoa nổi bật */
+    background-color: #1a000d;
     overflow: hidden;
   }
 
+  /* **SỬA LỖI:** Tăng kích thước trái tim và các thành phần con */
   .heart {
-    width: 200px;
-    height: 200px;
+    /* Tăng kích thước gốc từ 200px lên 250px */
+    width: 250px; 
+    height: 250px;
     position: relative;
     animation: heartbeat 1.2s infinite ease-in-out;
   }
@@ -26,12 +28,13 @@
   .heart:after {
     position: absolute;
     content: "";
-    left: 100px;
+    /* Tăng các giá trị tương ứng */
+    left: 125px; /* = width / 2 */
     top: 0;
-    width: 100px;
-    height: 160px;
-    background-color: #ff4081; /* Màu hồng đậm hơn */
-    border-radius: 100px 100px 0 0;
+    width: 125px; /* = width / 2 */
+    height: 200px; /* = height * 0.8 */
+    background-color: #ff4081;
+    border-radius: 125px 125px 0 0;
     transform: rotate(-45deg);
     transform-origin: 0 100%;
   }
@@ -48,9 +51,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 20px;
+    /* Tăng kích thước chữ cho phù hợp */
+    font-size: 24px; 
     font-weight: bold;
-    color: white; /* Chữ trắng nổi bật trên nền đỏ */
+    color: white;
     z-index: 1;
     text-align: center;
     width: 100%;
@@ -58,18 +62,10 @@
   }
 
   @keyframes heartbeat {
-    0%, 100% {
-      transform: scale(1);
-    }
-    10%, 30% {
-      transform: scale(0.9);
-    }
-    20%, 40%, 60%, 80% {
-        transform: scale(1.1);
-    }
-    50%, 70%, 90% {
-        transform: scale(1);
-    }
+    0%, 100% { transform: scale(1); }
+    10%, 30% { transform: scale(0.95); }
+    20%, 40%, 60%, 80% { transform: scale(1.1); }
+    50%, 70%, 90% { transform: scale(1); }
   }
   
   @keyframes fadeInText {
@@ -86,9 +82,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <script>
-    // Hàm bắn pháo hoa
     function celebrate() {
-        const duration = 5 * 1000; // 5 giây
+        const duration = 5 * 1000;
         const animationEnd = Date.now() + duration;
         const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
@@ -102,13 +97,10 @@
                 return clearInterval(interval);
             }
             const particleCount = 50 * (timeLeft / duration);
-            // Bắn từ hai bên
             confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
             confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
         }, 250);
     }
-
-    // Chạy hiệu ứng ngay khi trang được tải
     celebrate();
 </script>
 
