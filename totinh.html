@@ -1,76 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tỏ tình</title>
+    <title>Trả lời anh đi...</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
     <style>
-        body{
-            font-family: Arial, sans-serif;
+        body {
+            font-family: 'Quicksand', sans-serif; /* Font chữ mềm mại, dễ đọc */
             margin: 0;
-            padding: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: pink;
+            background-color: #fce4ec;
             height: 100vh;
+            box-sizing: border-box;
+            overflow: hidden; /* Ngăn thanh cuộn xuất hiện khi nút di chuyển */
         }
-        #container{
-            background-color: palevioletred;
-            padding: 50px;
-            border-radius: 40px;
-            width: 300px;
-        }
-        h3{
+
+        #container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.5s ease-out;
         }
-        .btn{
-            width: 100px;
-            height: 40px;
-            padding: 10px;
-            margin-left: 30px;
+
+        h3 {
+            font-size: 24px;
+            color: #d0006e;
+            margin-bottom: 30px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Tạo khoảng cách giữa 2 nút */
+            position: relative; /* Cần cho nút 'Không' */
+        }
+
+        .btn {
+            padding: 15px 25px;
             border: none;
-            border-radius: 15px;
-            background-color: wheat;
-            text-align: center;
-            text-decoration: none;
+            border-radius: 10px;
+            font-size: 18px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .btn:hover{
-            background-color: plum
+
+        #yes-btn {
+            background-color: #ff4081;
+            color: white;
         }
-        #no{
-            position: absolute;
-            width: 100px;
-            height: 40px;
-            margin-left: 40px;
-            transition: all 0.2s ease;
+
+        #yes-btn:hover {
+            background-color: #f50057;
+            transform: translateY(-2px);
+        }
+
+        #no-btn {
+            background-color: #f1f1f1;
+            color: #555;
+            position: absolute; /* Cho phép di chuyển tự do */
+            /* Hiệu ứng di chuyển mượt mà hơn */
+            transition: transform 0.3s ease, top 0.3s ease, left 0.3s ease; 
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
     <div id="container">
-        <div>
-            <h3>LÀM BẠN GÁI ANH NHA =))</h3>
-            <input class="btn" id="yes" type="button" value="Đồng ý &#x2764;" onclick="window.location.href='dongy.html'" >
-            <input class="btn" id="no" type="button" value="Không :((">
+        <h3>Làm bạn gái anh nha? 🥰</h3>
+        <div class="button-group">
+            <button class="btn" id="yes-btn" onclick="window.location.href='dongy.html'">Tất nhiên rùi ❤️</button>
+            <button class="btn" id="no-btn">Không :(</button>
         </div>
     </div>
+
     <script>
-        const button = document.getElementById('no');
+        const noButton = document.getElementById('no-btn');
+        const container = document.getElementById('container');
 
-        const handleMove = () => {
-            const newX = Math.random() * (window.innerWidth - button.offsetWidth);
-            const newY = Math.random() * (window.innerHeight - button.offsetHeight);
+        // Hàm xử lý di chuyển nút "Không"
+        const moveButton = () => {
+            // Giới hạn vùng di chuyển của nút trong cửa sổ trình duyệt
+            const maxWidth = window.innerWidth - noButton.offsetWidth;
+            const maxHeight = window.innerHeight - noButton.offsetHeight;
 
-            button.style.left = newX + 'px';
-            button.style.top = newY + 'px';
+            // Tạo vị trí ngẫu nhiên
+            const newX = Math.floor(Math.random() * maxWidth);
+            const newY = Math.floor(Math.random() * maxHeight);
+
+            // Dùng transform để di chuyển mượt hơn
+            noButton.style.position = 'fixed'; // Chuyển sang fixed để nó bay được khắp nơi
+            noButton.style.left = `${newX}px`;
+            noButton.style.top = `${newY}px`;
         };
+        
+        // Kiểm tra xem thiết bị là di động hay máy tính
+        const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 
-        // Sử dụng sự kiện 'click' cho điện thoại di động
-        const eventName = ('ontouchstart' in window) ? 'touchstart' : 'click';
-
-        button.addEventListener(eventName, handleMove);
+        if (isMobile) {
+            // Trên di động, di chuyển khi bấm
+            noButton.addEventListener('click', moveButton);
+        } else {
+            // Trên máy tính, di chuyển khi di chuột qua
+            noButton.addEventListener('mouseover', moveButton);
+        }
     </script>
 </body>
 </html>
