@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Quicksand', sans-serif; /* Font chữ mềm mại, dễ đọc */
+            font-family: 'Quicksand', sans-serif;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -18,7 +18,7 @@
             background-color: #fce4ec;
             height: 100vh;
             box-sizing: border-box;
-            overflow: hidden; /* Ngăn thanh cuộn xuất hiện khi nút di chuyển */
+            overflow: hidden;
         }
 
         #container {
@@ -41,8 +41,9 @@
         .button-group {
             display: flex;
             justify-content: center;
-            gap: 20px; /* Tạo khoảng cách giữa 2 nút */
-            position: relative; /* Cần cho nút 'Không' */
+            align-items: center; /* Căn giữa các nút */
+            gap: 20px;
+            flex-wrap: wrap; /* Cho phép các nút xuống dòng nếu không đủ không gian */
         }
 
         .btn {
@@ -58,19 +59,21 @@
         #yes-btn {
             background-color: #ff4081;
             color: white;
+            /* **SỬA LỖI:** Cho nút Yes lớn hơn một chút để tạo sự ưu tiên */
+            transform: scale(1.1);
         }
 
         #yes-btn:hover {
             background-color: #f50057;
-            transform: translateY(-2px);
+            transform: scale(1.2); /* Phóng to hơn khi hover */
         }
 
         #no-btn {
             background-color: #f1f1f1;
             color: #555;
-            position: absolute; /* Cho phép di chuyển tự do */
-            /* Hiệu ứng di chuyển mượt mà hơn */
-            transition: transform 0.3s ease, top 0.3s ease, left 0.3s ease; 
+            /* **SỬA LỖI:** Bỏ position: absolute ở đây đi */
+            /* Hiệu ứng di chuyển sẽ được JS thêm vào sau */
+            transition: transform 0.3s ease, top 0.3s ease, left 0.3s ease;
         }
 
         @keyframes slideUp {
@@ -96,32 +99,25 @@
 
     <script>
         const noButton = document.getElementById('no-btn');
-        const container = document.getElementById('container');
 
-        // Hàm xử lý di chuyển nút "Không"
         const moveButton = () => {
-            // Giới hạn vùng di chuyển của nút trong cửa sổ trình duyệt
             const maxWidth = window.innerWidth - noButton.offsetWidth;
             const maxHeight = window.innerHeight - noButton.offsetHeight;
 
-            // Tạo vị trí ngẫu nhiên
             const newX = Math.floor(Math.random() * maxWidth);
             const newY = Math.floor(Math.random() * maxHeight);
-
-            // Dùng transform để di chuyển mượt hơn
-            noButton.style.position = 'fixed'; // Chuyển sang fixed để nó bay được khắp nơi
+            
+            // **SỬA LỖI:** Thêm các thuộc tính này bằng JS khi cần thiết
+            noButton.style.position = 'fixed';
             noButton.style.left = `${newX}px`;
             noButton.style.top = `${newY}px`;
         };
         
-        // Kiểm tra xem thiết bị là di động hay máy tính
         const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 
         if (isMobile) {
-            // Trên di động, di chuyển khi bấm
             noButton.addEventListener('click', moveButton);
         } else {
-            // Trên máy tính, di chuyển khi di chuột qua
             noButton.addEventListener('mouseover', moveButton);
         }
     </script>
