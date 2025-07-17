@@ -107,12 +107,40 @@ function Rise() {
 
             console.log("升空完毕");
 
-        }
+            setTimeout(() => {
+                // Reset GIF (ép load lại bằng cách đổi src)
+                const gif = document.querySelector(".body_left img");
+                const currentSrc = gif.getAttribute("src").split("?")[0]; // bỏ chuỗi cũ nếu có
+                gif.setAttribute("src", currentSrc + "?t=" + new Date().getTime());
 
+                // Xóa các block cũ
+                while (love.children.length > 1) {
+                    love.removeChild(love.lastChild);
+                }
+
+                // Reset biến & trạng thái trái tim
+                index = 0;
+                block.style.display = "block";
+                block.style.visibility = "hidden";
+                block.style.left = block_left + "px";
+                block.style.top = block_top + "px";
+                love.style.top = "50%";
+
+                // Chạy lại hiệu ứng
+                setTimeout(() => {
+                    timer = setInterval(() => {
+                        Next();
+                    }, 300);
+                }, 1000);
+
+            }, 1000);
+
+        }
+        
         love.style.top = (love_top - distance) + "px";
 
     }, 22);
-
+    
 }
 
 window.onload = function () {
