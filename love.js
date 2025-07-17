@@ -106,12 +106,13 @@ function Rise() {
             clearInterval(timer2);
 
             console.log("升空完毕");
+
         }
-        
+
         love.style.top = (love_top - distance) + "px";
 
     }, 22);
-    
+
 }
 
 window.onload = function () {
