@@ -13,6 +13,7 @@ html, body {
 
 body {
     overflow: hidden; 
+    background-color: #fce4ec;
 }
 
 .container {
