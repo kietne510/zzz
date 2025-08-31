@@ -39,7 +39,25 @@
     </div>
 
     <script type="text/javascript" src="love.js"></script>
+<script type="text/javascript" src="love.js"></script>
+
+<script>
+  const audio = document.getElementById("audios");
+
+  // Thử play ngay khi load (chạy trên PC vẫn ok)
+  audio.play().catch(() => {
+    console.log("Autoplay bị chặn, chờ người dùng chạm...");
+  });
+
+  // Nếu bị chặn thì phát khi người dùng chạm vào màn hình lần đầu
+  document.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+    }
+  }, { once: true }); // chỉ cần chạy 1 lần
+</script>
 
 </body>
 
 </html>
+
